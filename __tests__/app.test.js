@@ -1,10 +1,8 @@
 require('dotenv').config();
 
-const { execSync } = require('child_process');
-
 const fakeRequest = require('supertest');
 const app = require('../lib/app');
-const client = require('../lib/client');
+
 
 describe('app routes', () => {
   describe('routes', () => {
@@ -47,16 +45,16 @@ describe('app routes', () => {
 
     test('returns weather data', async() => {
 
-      const expectation = Array(7).fill({ 
+      const expectation = { 
         'forecast': expect.any(String),
-        'time': expect.any(String) });
+        'time': expect.any(String) };
 
       const data = await fakeRequest(app)
-        .get('/weather')
+        .get('/weather?daily&lat=38.123&lon=-78.543')
         .expect('Content-Type', /json/)
         .expect(200);
 
-      expect(data.body).toEqual(expect.arrayContaining(expectation));
+      expect(data.body).toEqual(expect.arrayContaining([expectation]));
     });
   });
 });
