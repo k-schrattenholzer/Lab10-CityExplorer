@@ -74,5 +74,27 @@ describe('app routes', () => {
 
       expect(data.body).toEqual(expect.arrayContaining([expectation]));
     });
+
+    test('returns trail data', async() => {
+
+      const expectation = {
+        name: expect.any(String),
+        location: expect.any(String),
+        length: expect.any(Number),
+        stars: expect.any(Number),
+        star_votes: expect.any(Number),
+        summary: expect.any(String),
+        trail_url: expect.any(String)
+      };
+
+
+      const data = await fakeRequest(app)
+        .get('/trails?latitude=35.0841034&longitude=-106.650985')
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      
+      expect(data.body).toEqual(expect.arrayContaining([expectation]));
+    });
   });
 });
