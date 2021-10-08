@@ -40,17 +40,18 @@ describe('utils', () => {
     expect(mungedData[0]).toEqual(expectation);
   });
 
-  // test('munge trails data', async() => {
-  //   const expectation = {
-  //     name: expect.any(String),
-  //     location: expect.any(String),
-  //     length: expect.any(Number),
-  //     stars: expect.any(Number),
-  //     star_votes: expect.any(Number),
-  //     summary: expect.any(String),
-  //     trail_url: expect.any(String)
-  //   };
-  //   const editedData = mungeTrailsFetch(trail_data);
-  //   expect(editedData).toEqual(expect.arrayContaining([expectation]));
-  // });
+  test('munge trail data', async() => {
+    const expectation = {
+      name: expect.any(String),
+      location: expect.any(String),
+      length: expect.any(Number),
+      stars: expect.any(Number),
+      star_votes: expect.any(Number),
+      summary: expect.any(String),
+      trail_url: expect.any(String)
+    };
+    const editedData = mungeTrailFetch(trail_data);
+    console.log(editedData);
+    expect(editedData).toEqual(expect.arrayContaining([expectation]));
+  });
 });
